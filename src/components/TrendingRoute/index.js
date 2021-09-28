@@ -93,7 +93,7 @@ class TrendingRoute extends Component {
         {value => {
           const {isDarkTheme} = value
 
-          const bgColor = isDarkTheme ? '#231f20' : '#f9f9f9'
+          const bgColor = isDarkTheme ? '#0f0f0f' : '#f9f9f9'
 
           const textColor = isDarkTheme ? '#f9f9f9' : '#181818'
           return (

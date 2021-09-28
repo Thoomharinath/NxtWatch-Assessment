@@ -169,13 +169,7 @@ class SearchVideos extends Component {
         We are having some trouble to complete your request.Please try again.
       </Desc>
       <NavLink>
-        <Retry
-          className="button"
-          type="button"
-          onClick={this.getSuggestionVideos}
-        >
-          Retry
-        </Retry>
+        <Retry onClick={this.getSuggestionVideos}>Retry</Retry>
       </NavLink>
     </NotFoundContainer>
   )
