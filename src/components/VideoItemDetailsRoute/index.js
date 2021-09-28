@@ -1,10 +1,14 @@
 import {Component} from 'react'
-import {Link} from 'react-router-dom'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 import ReactPlayer from 'react-player'
 
-import {AiOutlineLike, AiOutlineDislike} from 'react-icons/ai'
+import {
+  AiOutlineLike,
+  AiOutlineDislike,
+  AiFillLike,
+  AiFillDislike,
+} from 'react-icons/ai'
 import {RiPlayListAddFill} from 'react-icons/ri'
 
 import CartContext from '../../context/CartContext'
@@ -47,8 +51,9 @@ class VideoDetails extends Component {
   state = {
     videoDetails: [],
     apiStatus: apiStatusConstants.initial,
-    isSaved: false,
     isVideoSaved: false,
+    isLiked: false,
+    isDisliked: false,
   }
 
   componentDidMount() {
@@ -95,7 +100,7 @@ class VideoDetails extends Component {
         apiStatus: apiStatusConstants.success,
       })
     }
-    if (response.status === 404) {
+    if (response.ok !== true) {
       this.setState({
         apiStatus: apiStatusConstants.failure,
       })
@@ -105,24 +110,55 @@ class VideoDetails extends Component {
   renderSpecificVideoDetails = () => (
     <CartContext.Consumer>
       {value => {
-        const {videoDetails, isSaved, isVideoSaved} = this.state
+        const {videoDetails, isVideoSaved, isLiked, isDisliked} = this.state
         const {
           id,
-          publishedAt,
           channel,
           description,
           viewCount,
           videoUrl,
           title,
-          thumbnailUrl,
+          publishedAt,
+          videoSaved,
         } = videoDetails
         const {name, profileImageUrl, subscriberCount} = channel
-        const {addToSaveVideos} = value
+        const {addToSaveVideos, removeSaveVideos} = value
+
+        const addOrRemoveItem = () => {
+          if (isVideoSaved === true) {
+            removeSaveVideos(id)
+          } else {
+            addToSaveVideos({...videoDetails, videoSaved: true})
+          }
+        }
 
         const saveVideoToList = () => {
-          addToSaveVideos({...videoDetails})
-          this.setState(prev => ({isVideoSaved: !prev.isVideoSaved}))
+          this.setState(
+            prev => ({isVideoSaved: !prev.isVideoSaved}),
+            addOrRemoveItem,
+          )
         }
+
+        const onClickLikeButton = () => {
+          this.setState(prev => ({isLiked: !prev.isLiked, isDisliked: false}))
+        }
+
+        const onClickDislikeButton = () => {
+          this.setState(prev => ({
+            isDisliked: !prev.isDisliked,
+            isLiked: false,
+          }))
+        }
+
+        const likeClass = isLiked ? '#2563eb' : '#64748b'
+        const dislikeClass = isDisliked ? '#2563eb' : '#64748b'
+
+        const likeIcon = isLiked ? <AiFillLike /> : <AiOutlineLike />
+        const dislikeIcon = isDisliked ? (
+          <AiFillDislike />
+        ) : (
+          <AiOutlineDislike />
+        )
 
         return (
           <div data-testid="videoItemDetails">
@@ -139,24 +175,32 @@ class VideoDetails extends Component {
                 <VideoDetailsTextContainer>
                   <VideoDetailsTitle>{title}</VideoDetailsTitle>
                   <ViewsDetailsContainer>
-                    <ViewsText>{viewCount} views</ViewsText>
+                    <ViewsText>{viewCount} views </ViewsText>
+                    <ViewsText>{publishedAt}</ViewsText>
                     <LikesContainer>
-                      <IconContainer>
-                        <AiOutlineLike />
-                        <ViewsText>Like</ViewsText>
+                      <IconContainer
+                        type="button"
+                        color={likeClass}
+                        onClick={onClickLikeButton}
+                      >
+                        {likeIcon}
+                        <ViewsText color={likeClass}>Like</ViewsText>
                       </IconContainer>
-                      <IconContainer>
-                        <AiOutlineDislike />
-                        <ViewsText>Dislike</ViewsText>
+                      <IconContainer
+                        color={dislikeClass}
+                        type="button"
+                        onClick={onClickDislikeButton}
+                      >
+                        {dislikeIcon}
+                        <ViewsText color={dislikeClass}>Dislike</ViewsText>
                       </IconContainer>
                       <IconContainer
                         onClick={saveVideoToList}
-                        isSaved={isSaved}
-                        color={isVideoSaved ? '#4f46e5' : '#181818'}
+                        color={videoSaved ? '#4f46e5' : '#181818'}
                       >
                         <RiPlayListAddFill />
-                        <ViewsText color={isVideoSaved ? '#4f46e5' : '#181818'}>
-                          Save
+                        <ViewsText color={videoSaved ? '#4f46e5' : '#181818'}>
+                          {isVideoSaved ? 'Saved' : 'Save'}
                         </ViewsText>
                       </IconContainer>
                     </LikesContainer>
@@ -164,7 +208,7 @@ class VideoDetails extends Component {
                   <HorizontalLine />
                   <ChannelContainer>
                     <LogoContainer>
-                      <ChannelLogo src={profileImageUrl} alt={name} />
+                      <ChannelLogo src={profileImageUrl} alt="channel logo" />
                     </LogoContainer>
                     <ChannelDetailsContainer>
                       <ViewsText>{name}</ViewsText>
@@ -222,6 +266,8 @@ class VideoDetails extends Component {
 
       case apiStatusConstants.inProgress:
         return this.renderLoadingView()
+      case apiStatusConstants.failure:
+        return this.renderFailureView()
       default:
         return null
     }

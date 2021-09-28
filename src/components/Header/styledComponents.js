@@ -9,7 +9,7 @@ export const NavHeader = styled.nav`
     padding-left: 30px;
     padding-right: 30px;
     position: sticky;
-    position: -webkit-sticky;
+    scroll-behavior: smooth;
     height: 50px;
     background-color: ${props => props.bgColor}
 }
@@ -70,9 +70,13 @@ export const ModalContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  height: 200px;
+  width: 400px;
+  background-color: #cbd5e1;
+  border-radius: 10px;
 `
 
-export const NavbarLargeContianer = styled.div`
+export const NavbarLargeContainer = styled.div`
   display: none;
   @media screen and (min-width: 768px) {
     display: flex;
@@ -81,7 +85,7 @@ export const NavbarLargeContianer = styled.div`
   }
 `
 
-export const NavbarSmallContianer = styled.div`
+export const NavbarSmallContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100vh;
@@ -100,6 +104,9 @@ export const AlignRow = styled.div`
 export const AlignColumn = styled.div`
   display: flex;
   flex-direction: column;
+  background-color: #cbd5e1;
+  border-radius: 10px;
+  padding: 20px;
 `
 
 export const ProfileImg = styled.img`
@@ -109,20 +116,24 @@ export const ProfileImg = styled.img`
 export const CloseButton = styled.button`
   align-self: flex-end;
   background-color: transparent;
-  width: 80px;
-  height: 50px;
   border: 1px solid grey;
+  padding: 13px;
+  padding-right: 20px;
+  padding-left: 20px;
   color: grey;
   margin: 12px;
   outline: none;
   cursor: pointer;
   border-radius: 10px;
+  font-family: Roboto;
+  font-weight: bold;
+  font-size: 15px;
 `
 export const ModalDesc = styled.p`
   font-family: 'Roboto';
   font-size: 25px;
   margin: 10px;
-  color: grey;
+  color: black;
 `
 
 export const IconButton = styled.button`
@@ -135,13 +146,17 @@ export const ConfirmButton = styled.button`
   align-self: flex-end;
   background-color: #3b82f6;
   color: white;
-  width: 80px;
-  height: 50px;
+  padding: 15px;
+  padding-right: 20px;
+  padding-left: 20px;
   border: none;
   margin: 10px;
   outline: none;
   cursor: pointer;
   border-radius: 10px;
+  font-family: Roboto;
+  font-weight: bold;
+  font-size: 15px;
 `
 
 export const HeaderList = styled.ul`

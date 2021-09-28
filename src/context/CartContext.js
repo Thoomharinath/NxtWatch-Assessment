@@ -7,6 +7,7 @@ const CartContext = React.createContext({
   activeTabItem: () => {},
   activeTab: '',
   onChangeTheme: () => {},
+  removeSaveVideos: () => {},
 })
 
 export default CartContext

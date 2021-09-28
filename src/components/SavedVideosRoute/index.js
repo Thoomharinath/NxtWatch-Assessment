@@ -1,5 +1,4 @@
 import {Component} from 'react'
-import {Link} from 'react-router-dom'
 
 import Loader from 'react-loader-spinner'
 
@@ -27,34 +26,9 @@ import {
   NotFoundContainer,
   Heading,
   Desc,
-  Retry,
-  NavLink,
 } from './styledComponents'
 
-const apiStatusConstants = {
-  initial: 'INITIAL',
-  success: 'SUCCESS',
-  failure: 'FAILURE',
-  inProgress: 'IN_PROGRESS',
-}
-
 class SavedVideosRoute extends Component {
-  state = {
-    apiStatus: apiStatusConstants.initial,
-    searchedVideos: [],
-  }
-
-  onChangeSearchInput = event => {
-    this.setState({searchInput: event.target.value})
-  }
-
-  onEnterClickSearch = event => {
-    if (event.key === 'Enter') {
-      const {searchInput} = this.state
-      this.setState({searchValue: searchInput}, this.getSuggestionVideos)
-    }
-  }
-
   renderSavedVideos = () => (
     <CartContext.Consumer>
       {value => {
@@ -67,7 +41,7 @@ class SavedVideosRoute extends Component {
         console.log(savedVideos)
         const isVideosAvailable = savedVideos.length === 0
 
-        return isVideosAvailable === true ? (
+        return isVideosAvailable ? (
           <NotFoundContainer bgColor={bgColor}>
             <Image
               src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-saved-videos-img.png"
@@ -109,17 +83,6 @@ class SavedVideosRoute extends Component {
     </ProductsLoaderContainer>
   )
 
-  renderNoVideosView = () => (
-    <NotFoundContainer>
-      <Image
-        src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-saved-videos-img.png"
-        alt="no saved videos"
-      />
-      <Heading className="cart-empty-heading">No saved videos found</Heading>
-      <Desc>You can save your videos while watching them.</Desc>
-    </NotFoundContainer>
-  )
-
   render() {
     return (
       <CartContext.Consumer>
@@ -128,7 +91,6 @@ class SavedVideosRoute extends Component {
 
           const bgColor = isDarkTheme ? '#0f0f0f' : '#f9f9f9'
 
-          const textColor = isDarkTheme ? '#f9f9f9' : '#181818'
           return (
             <div data-testid="savedVideos">
               <Header />

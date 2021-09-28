@@ -38,6 +38,12 @@ class App extends Component {
     }
   }
 
+  removeSaveVideos = id => {
+    const {savedVideos} = this.state
+    const updatedVideos = savedVideos.filter(each => each.id !== id)
+    this.setState({savedVideos: updatedVideos})
+  }
+
   activeTabItem = item => {
     this.setState({activeTab: item})
   }
@@ -55,6 +61,7 @@ class App extends Component {
           activeTabItem: this.activeTabItem,
           activeTab,
           onChangeTheme: this.onChangeTheme,
+          removeSaveVideos: this.removeSaveVideos,
         }}
       >
         <Switch>

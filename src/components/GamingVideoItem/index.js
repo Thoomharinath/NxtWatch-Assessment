@@ -1,12 +1,7 @@
-import {Link} from 'react-router-dom'
-import {formatDistanceToNow} from 'date-fns'
-import dateFormat from 'dateformat'
-
 import {
   VideoCardContainer,
   ThumbnailImage,
   VideoCardBottomContainer,
-  ProfileImage,
   VideoDetailsContainer,
   VideoDetailsText,
   NavLink,
@@ -18,7 +13,7 @@ const VideoCardTwo = props => {
   return (
     <NavLink to={`videos/${id}`}>
       <VideoCardContainer>
-        <ThumbnailImage src={thumbnailUrl} alt={title} />
+        <ThumbnailImage src={thumbnailUrl} alt="video thumbnail" />
         <VideoCardBottomContainer>
           <VideoDetailsContainer>
             <VideoDetailsText>{title}</VideoDetailsText>

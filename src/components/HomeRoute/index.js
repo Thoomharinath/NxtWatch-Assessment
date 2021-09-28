@@ -11,73 +11,56 @@ import CartContext from '../../context/CartContext'
 import {
   HomeContainer,
   HomeSideContainer,
-  GetItButton,
-  BannerImageContainer,
   BannerImage,
-  BannerText,
   HomeStickyContainer,
   CloseButton,
   ModalContainer,
-  AlignRow,
-  Heading,
-  Image,
+  GetItNowButton,
+  BannerImageContainer,
 } from './styledComponents'
 
 import SideBar from '../SideBar'
 
-const activeStatus = [
-  {id: 'Home', home: 'HOME'},
-  {id: 'Trending', trending: 'TRENDING'},
-  {id: 'Gaming', gaming: 'GAMING'},
-  {id: 'SavedVideos', saved: 'SAVED VIDEOS'},
-]
-
 class HomeRoute extends Component {
-  state = {activeTab: 'HOME'}
+  state = {display: 'flex'}
 
-  onChangeActiveTab = id => {
-    this.setState({activeTab: id})
+  onCloseBanner = () => {
+    this.setState({display: 'none'}, this.renderHomeVideos)
   }
 
-  renderHomeVideos = () => (
-    <>
-      <ModalContainer>
-        {close => (
+  renderHomeVideos = () => {
+    const {display} = this.state
+
+    return (
+      <>
+        <BannerImageContainer data-testid="banner" display={display}>
           <ModalContainer>
-            <AlignRow>
-              <CloseButton
-                type="button"
-                data-testid="close"
-                onClick={() => close()}
-              >
-                <IoMdClose size={20} color="#231f20" />
-              </CloseButton>
-              <BannerImage
-                src="https://assets.ccbp.in/frontend/react-js/nxt-watch-banner-bg.png"
-                alt="banner"
-              />
-              <BannerImage
-                src=" https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-                alt="nxt watch logo"
-              />
-            </AlignRow>
+            <BannerImage
+              src=" https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
+              alt="nxt watch logo"
+            />
+            <p>Buy Nxt Watch Premium</p>
+            <GetItNowButton>GET IT NOW</GetItNowButton>
           </ModalContainer>
-        )}
-      </ModalContainer>
-      <SearchVideos />
-    </>
-  )
+          <CloseButton
+            type="button"
+            data-testid="close"
+            onClick={this.onCloseBanner}
+          >
+            <IoMdClose size={20} color="#231f20" />
+          </CloseButton>
+        </BannerImageContainer>
+        <SearchVideos />
+      </>
+    )
+  }
 
   render() {
-    const {activeTab} = this.state
-
     return (
       <CartContext.Consumer>
         {value => {
           const {isDarkTheme} = value
           const bgColor = isDarkTheme ? '#181818' : '#f9f9f9'
-
-          const textColor = isDarkTheme ? '#f9f9f9' : '#181818'
 
           return (
             <div data-testid="home">

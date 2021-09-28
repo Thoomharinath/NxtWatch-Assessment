@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import {Link} from 'react-router-dom'
 
 export const HomeContainer = styled.div`
   display: flex;
@@ -11,8 +10,8 @@ export const HomeContainer = styled.div`
 export const BannerImageContainer = styled.div`
   background-image: url('https://assets.ccbp.in/frontend/react-js/nxt-watch-banner-bg.png');
   background-size: cover;
-  display: flex;
-  flex-direction: column;
+  display: ${props => props.display};
+  flex-direction: row;
   width: 80%;
   height: 40vh;
   padding: 50px;
@@ -78,7 +77,9 @@ export const AlignRow = styled.div`
 
 export const ModalContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
 `
 export const Image = styled.img`
   width: 300px;
@@ -89,4 +90,12 @@ export const Heading = styled.h1`
   color: black;
   text-align: center;
   font-size: 30px;
+`
+
+export const GetItNowButton = styled.button`
+  background-color: transparent;
+  border: 1px solid #181818;
+  padding: 5px;
+  color: #181818;
+  width: 100px;
 `

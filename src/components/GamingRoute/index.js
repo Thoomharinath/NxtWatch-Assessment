@@ -1,5 +1,4 @@
 import {Component} from 'react'
-import {Link} from 'react-router-dom'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 
@@ -13,12 +12,17 @@ import CartContext from '../../context/CartContext'
 
 import {
   SearchVideosContainer,
-  SearchInput,
   VideosContainer,
   ProductsLoaderContainer,
   HomeStickyContainer,
   HomeSideContainer,
   HomeContainer,
+  NotFoundContainer,
+  Image,
+  Heading,
+  Desc,
+  Retry,
+  NavLink,
 } from './styledComponents'
 
 const apiStatusConstants = {
@@ -65,7 +69,7 @@ class GamingRoute extends Component {
         apiStatus: apiStatusConstants.success,
       })
     }
-    if (response.status === 404) {
+    if (response.ok !== true) {
       this.setState({
         apiStatus: apiStatusConstants.failure,
       })
@@ -90,10 +94,9 @@ class GamingRoute extends Component {
 
         const bgColor = isDarkTheme ? '#231f20' : '#f9f9f9'
 
-        const textColor = isDarkTheme ? '#f9f9f9' : '#181818'
-
         return (
           <SearchVideosContainer data-testid="gaming" bgColor={bgColor}>
+            <h1>Gaming</h1>
             <VideosContainer bgColor={bgColor}>
               {searchedVideos.map(each => (
                 <VideoCardTwo key={each.id} details={each} />
@@ -105,6 +108,29 @@ class GamingRoute extends Component {
     </CartContext.Consumer>
   )
 
+  renderFailureView = () => (
+    <NotFoundContainer>
+      <Image
+        src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
+        alt="failure view"
+        className="jobs-failure-img"
+      />
+      <Heading>Oops! Something Went Wrong</Heading>
+      <Desc className="jobs-failure-description">
+        We are having some trouble to complete your request.Please try again.
+      </Desc>
+      <NavLink>
+        <Retry
+          className="button"
+          type="button"
+          onClick={this.getSuggestionVideos}
+        >
+          Retry
+        </Retry>
+      </NavLink>
+    </NotFoundContainer>
+  )
+
   renderAllVideos = () => {
     const {apiStatus} = this.state
 
@@ -114,6 +140,8 @@ class GamingRoute extends Component {
 
       case apiStatusConstants.inProgress:
         return this.renderLoadingView()
+      case apiStatusConstants.failure:
+        return this.renderFailureView()
       default:
         return null
     }
@@ -127,7 +155,6 @@ class GamingRoute extends Component {
 
           const bgColor = isDarkTheme ? '#0f0f0f' : '#f9f9f9'
 
-          const textColor = isDarkTheme ? '#f9f9f9' : '#181818'
           return (
             <div data-testid="home">
               <Header />

@@ -40,11 +40,11 @@ export const SideBarBottomContainer = styled.div`
   height: 100px;
 `
 
-export const BottomText = styled.h1`
+export const BottomText = styled.p`
   font-family: 'Roboto';
   color: ${props => props.color};
   width: 140px;
-  font-size: 25px;
+  font-size: 20px;
 `
 
 export const IconsContainer = styled.div`

@@ -6,7 +6,7 @@ export const VideoCardContainer = styled.li`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 200px;
+  width: 250px;
   list-style-type: none;
   cursor: pointer;
   margin: 25px;
@@ -18,7 +18,7 @@ export const VideoCardContainer = styled.li`
 export const ThumbnailImage = styled.img`
   width: 100%;
   height: 250px;
-  object-fit: scale-down;
+  object-fit: fill;
 `
 export const VideoCardBottomContainer = styled.div`
   display: flex;
@@ -42,6 +42,7 @@ export const VideoDetailsText = styled.p`
   font-size: 15px;
   font-weight: bold;
 `
+
 export const NavLink = styled(Link)`
   color: #1e293b;
   text-decoration: none;

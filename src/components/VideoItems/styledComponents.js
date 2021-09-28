@@ -28,11 +28,12 @@ export const ProfileImage = styled.img`
 export const VideoDetailsContainer = styled.div`
   display: flex;
   flex-direction: column;
+  margin-left: 10px;
 `
 export const VideoDetailsText = styled.p`
   color: #475569;
   font-family: 'Roboto';
-  font-size: 15px;
+  font-size: 12px;
   font-weight: bold;
   color: ${props => props.color};
 `

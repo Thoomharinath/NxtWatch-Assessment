@@ -34,13 +34,13 @@ export const VideoDetailsContainer = styled.div`
   margin-left: 25px;
 `
 export const VideoDetailsText = styled.p`
-  color: #ffffff;
+  color: ${props => props.textColor};
   font-family: 'Roboto';
-  font-size: 25px;
+  font-size: ${props => props.size}px;
   font-weight: bold;
 `
 export const NavLink = styled(Link)`
-  color: ${props => props.textcolor};
+  color: ${props => props.textColor};
   text-decoration: none;
   margin-bottom: 10px;
 `

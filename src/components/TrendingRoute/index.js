@@ -6,8 +6,6 @@ import {AiFillFire} from 'react-icons/ai'
 
 import VideoCardTwo from '../VideoCardTwo'
 
-import VideoCard from '../VideoItems'
-
 import Header from '../Header'
 
 import SideBar from '../SideBar'
@@ -80,7 +78,7 @@ class TrendingRoute extends Component {
         apiStatus: apiStatusConstants.success,
       })
     }
-    if (response.status === 404) {
+    if (response.ok !== true) {
       this.setState({
         apiStatus: apiStatusConstants.failure,
       })
@@ -109,7 +107,7 @@ class TrendingRoute extends Component {
 
               <VideosContainer>
                 {searchedVideos.map(each => (
-                  <VideoCard key={each.id} details={each} />
+                  <VideoCardTwo key={each.id} details={each} />
                 ))}
               </VideosContainer>
             </SearchVideosContainer>
@@ -159,6 +157,8 @@ class TrendingRoute extends Component {
         return this.renderTrendingVideos()
       case apiStatusConstants.inProgress:
         return this.renderLoadingView()
+      case apiStatusConstants.failure:
+        return this.renderFailureView()
       default:
         return null
     }
@@ -172,9 +172,8 @@ class TrendingRoute extends Component {
 
           const bgColor = isDarkTheme ? '#0f0f0f' : '#f9f9f9'
 
-          const textColor = isDarkTheme ? '#f9f9f9' : '#181818'
           return (
-            <div data-testid="trending">
+            <div>
               <Header />
               <HomeContainer data-testid="home" bgColor={bgColor}>
                 <HomeStickyContainer>

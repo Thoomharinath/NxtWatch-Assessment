@@ -25,7 +25,7 @@ const NotFound = () => (
               Page Not Found
             </Heading>
             <Desc isDark={isDarkDesc}>
-              we’re sorry, the page you requested could not be found
+              we are sorry, the page you requested could not be found.
             </Desc>
           </NotFoundContainer>
         </>

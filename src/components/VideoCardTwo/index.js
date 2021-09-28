@@ -1,12 +1,9 @@
-import {Link} from 'react-router-dom'
-
 import CartContext from '../../context/CartContext'
 
 import {
   VideoCardContainer,
   ThumbnailImage,
   VideoCardBottomContainer,
-  ProfileImage,
   VideoDetailsContainer,
   VideoDetailsText,
   NavLink,
@@ -14,7 +11,8 @@ import {
 
 const VideoCardTwo = props => {
   const {details} = props
-  const {title, id, thumbnailUrl, viewCount} = details
+  const {title, id, thumbnailUrl, viewCount, channel, publishedAt} = details
+  const {name} = channel
 
   return (
     <CartContext.Consumer>
@@ -26,17 +24,19 @@ const VideoCardTwo = props => {
         const textColor = isDarkTheme ? '#f9f9f9' : '#181818'
 
         return (
-          <NavLink to={`videos/${id}`} color={textColor}>
+          <NavLink to={`videos/${id}`} color={bgColor}>
             <VideoCardContainer>
               <ThumbnailImage src={thumbnailUrl} alt="video thumbnail" />
               <VideoCardBottomContainer>
                 <VideoDetailsContainer>
-                  <VideoDetailsText textcolor={textColor}>
+                  <VideoDetailsText textColor={textColor} size={20}>
                     {title}
                   </VideoDetailsText>
-                  <VideoDetailsText textcolor={textColor}>
+                  <VideoDetailsText>{name}</VideoDetailsText>
+                  <VideoDetailsText textColor={textColor} size={15}>
                     {viewCount} views
                   </VideoDetailsText>
+                  <VideoDetailsText>{publishedAt}</VideoDetailsText>
                 </VideoDetailsContainer>
               </VideoCardBottomContainer>
             </VideoCardContainer>

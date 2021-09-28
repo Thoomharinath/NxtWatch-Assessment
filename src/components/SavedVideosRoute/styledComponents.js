@@ -103,7 +103,7 @@ export const Heading = styled.h1`
 `
 
 export const Desc = styled.p`
-  color: black;
+  color: ${props => props.textColor};
   font-size: 20px;
   margin-left: 15px;
 `

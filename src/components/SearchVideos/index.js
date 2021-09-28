@@ -1,5 +1,4 @@
 import {Component} from 'react'
-import {Link} from 'react-router-dom'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 import {AiOutlineSearch} from 'react-icons/ai'
@@ -46,7 +45,7 @@ class SearchVideos extends Component {
 
   onClickSearchButton = () => {
     const {searchInput} = this.state
-    this.setState({searchInput}, this.getSuggestionVideos)
+    this.setState({searchValue: searchInput}, this.getSuggestionVideos)
   }
 
   onEnterClickSearch = event => {
@@ -88,7 +87,7 @@ class SearchVideos extends Component {
         apiStatus: apiStatusConstants.success,
       })
     }
-    if (response.status === 404) {
+    if (response.ok !== true) {
       this.setState({
         apiStatus: apiStatusConstants.failure,
       })
@@ -109,10 +108,9 @@ class SearchVideos extends Component {
       {value => {
         const {isDarkTheme} = value
         const {searchInput, searchedVideos} = this.state
+        console.log(searchInput)
 
         const bgColor = isDarkTheme ? '#231f20' : '#f9f9f9'
-
-        const textColor = isDarkTheme ? '#f9f9f9' : '#181818'
         const isVideosAvailable = searchedVideos.length === 0
 
         return isVideosAvailable ? (
@@ -126,16 +124,9 @@ class SearchVideos extends Component {
               No Search results found
             </Heading>
             <Desc className="no-products-description">
-              Try different keywords or remove search.
+              Try different key words or remove search filter
             </Desc>
-
-            <Retry
-              className="button"
-              type="button"
-              onClick={this.getSuggestionVideos}
-            >
-              Retry
-            </Retry>
+            <Retry onClick={this.getSuggestionVideos}>Retry</Retry>
           </div>
         ) : (
           <SearchVideosContainer bgColor={bgColor}>

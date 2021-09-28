@@ -51,18 +51,20 @@ export const LikesContainer = styled.div`
 `
 
 export const ViewsText = styled.p`
-  color: #181818;
+  color: ${props => props.color};
   font-family: Roboto;
   margin-left: 10px;
 `
 
-export const IconContainer = styled.div`
+export const IconContainer = styled.button`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   margin-right: 15px;
   cursor: pointer;
+  background-color: transparent;
+  border: 0px none;
   color: ${props => props.color};
 `
 

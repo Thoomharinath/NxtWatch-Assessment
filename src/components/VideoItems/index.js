@@ -1,5 +1,3 @@
-import {Link} from 'react-router-dom'
-
 import CartContext from '../../context/CartContext'
 
 import {
@@ -14,7 +12,7 @@ import {
 
 const VideoCard = props => {
   const {details} = props
-  const {channel, title, id, publishedAt, thumbnailUrl, viewCount} = details
+  const {channel, title, id, thumbnailUrl, publishedAt, viewCount} = details
   const {name, profileImageUrl} = channel
 
   return (
@@ -36,6 +34,7 @@ const VideoCard = props => {
                   <VideoDetailsText color={textColor}>
                     {viewCount} views
                   </VideoDetailsText>
+                  <VideoDetailsText>{publishedAt}</VideoDetailsText>
                 </VideoDetailsContainer>
               </VideoCardBottomContainer>
             </VideoCardContainer>

@@ -23,7 +23,6 @@ import {
   ConfirmButton,
   ModalDesc,
   AlignColumn,
-  HeaderList,
   ContentListItem,
 } from './styledComponents'
 
@@ -89,7 +88,7 @@ const Header = props => {
                   {close => (
                     <ModalContainer>
                       <AlignColumn>
-                        <ModalDesc>Are you sure you want to logout?</ModalDesc>
+                        <ModalDesc>Are you sure, you want to logout</ModalDesc>
                         <AlignRow>
                           <CloseButton
                             type="button"

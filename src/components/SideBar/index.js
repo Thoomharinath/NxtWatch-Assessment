@@ -18,16 +18,7 @@ import {
   NavLink,
 } from './styledComponents'
 
-const activeStatus = [
-  {id: 'Home', status: 'HOME'},
-  {id: 'Trending', status: 'TRENDING'},
-  {id: 'Gaming', status: 'GAMING'},
-  {id: 'SavedVideos', status: 'SAVED VIDEOS'},
-]
-
 class SideBar extends Component {
-  state = {isActiveStatus: activeStatus[0].status}
-
   renderStatusItems = () => (
     <CartContext.Consumer>
       {value => {
@@ -35,24 +26,18 @@ class SideBar extends Component {
 
         const onClickHomeTabItem = () => {
           activeTabItem('HOME')
-          this.setState({isActiveStatus: 'HOME'})
         }
         const onClickTrendingTabItem = () => {
           activeTabItem('TRENDING')
-          this.setState({isActiveStatus: 'TRENDING'})
         }
 
         const onClickGamingTabItem = () => {
           activeTabItem('GAMING')
-          this.setState({isActiveStatus: 'GAMING'})
         }
 
         const onClickSavedVideosTabItem = () => {
           activeTabItem('SAVED VIDEOS')
-          this.setState({isActiveStatus: 'SAVED VIDEOS'})
         }
-
-        const {isActiveStatus} = this.state
 
         const bgColor = isDarkTheme ? '#ffffff' : '#000000'
 
@@ -130,7 +115,7 @@ class SideBar extends Component {
               </TextItemContainer>
             </NavItemsContainer>
             <SideBarBottomContainer>
-              <BottomText color={textColor}>Contact Us</BottomText>
+              <BottomText color={textColor}>CONTACT US</BottomText>
               <IconsContainer>
                 <IconImage
                   src="https://assets.ccbp.in/frontend/react-js/nxt-watch-facebook-logo-img.png"
@@ -146,7 +131,7 @@ class SideBar extends Component {
                 />
               </IconsContainer>
               <ItemText color={textColor}>
-                Enjoy! Now to see your channels and recommendations
+                Enjoy! Now to see your channels and recommendations!
               </ItemText>
             </SideBarBottomContainer>
           </SideBarContainer>
