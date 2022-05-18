@@ -8,7 +8,7 @@ import Header from '../Header'
 
 import SideBar from '../SideBar'
 
-import CartContext from '../../context/CartContext'
+import   CartContext from '../../context/CartContext'
 
 import {
   SearchVideosContainer,
